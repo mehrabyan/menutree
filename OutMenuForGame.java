@@ -1,14 +1,14 @@
 package menutree;
 
-import java.util.*;
+import java.util.Map;
 
-public class MainTreeMap {
+public class OutMenuForGame {
 
-	public static void toPrint() {
+	public static void printMenuForGame() {
 		SetTreeMap st = new SetTreeMap();
-		Tree<String> mt = st.generateMenuTree();
+		TreeForMenu<String>  tfm = (TreeForMenu<String>) st.generateMenuTree();
 		Map<Integer, Node<String>> level1, level2, level3;
-		level1 = mt.getRootNode().getChildren();
+		level1 = tfm.getRootNode().getChildren();
 		for (Integer i : level1.keySet()) {
 			level2 = level1.get(i).getChildren();
 			System.out.println(i + " " + level1.get(i).getContent());
