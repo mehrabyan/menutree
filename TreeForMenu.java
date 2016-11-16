@@ -1,6 +1,7 @@
 package menutree;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class TreeForMenu extends Tree<String> {
 	String line = null;
@@ -11,35 +12,33 @@ public class TreeForMenu extends Tree<String> {
 		try {
 			fttl.readMenuFromFile();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		for (int i = 0; i < fttl.linesMenuText.size(); i++) {
-			String[] dots = { null, null, null };
 			line = (String) fttl.linesMenuText.get(i);
 			if (line.length() != 0) {
 				linePartsDoubleDot = line.split(":");
-				dots = linePartsDoubleDot[0].split(".");
+				String[] level = linePartsDoubleDot[0].split(Pattern.quote("."));
 				Node<String> node = new Node(linePartsDoubleDot[1]);
-				System.out.println(dots[0].toString());
-				if (dots[1] == null) {
+				if (level.length == 1) {
 					this.getRootNode().addChildNode(node);
-					System.out.println(this.getRootNode().getChildNode(Integer.parseInt(dots[0])).getContent());
-				} else {
-					if (dots[2] == null) {
-						this.getRootNode().getChildNode(Integer.parseInt(dots[0])).addChildNode(node);
-						System.out.println(this.getRootNode().getChildNode(Integer.parseInt(dots[0]))
-								.getChildNode(Integer.parseInt(dots[1])).getContent());
+					System.out.println(level[0] + ". " + this.getRootNode().getChildNode(Integer.parseInt(level[0])).getContent());
+				} 
+					if (level.length == 2) {
+						this.getRootNode().getChildNode(Integer.parseInt(level[0])).addChildNode(node);
+						System.out.println("\t" + level[1] + ". " +this.getRootNode()
+								.getChildNode(Integer.parseInt(level[0]))
+								.getChildNode(Integer.parseInt(level[1])).getContent());
 					}
-					this.getRootNode().getChildNode(Integer.parseInt(dots[0])).getChildNode(Integer.parseInt(dots[1]))
+						if(level.length == 3) {
+					this.getRootNode().getChildNode(Integer.parseInt(level[0])).getChildNode(Integer.parseInt(level[1]))
 							.addChildNode(node);
+					System.out.println("\t\t" + level[2] + ". " + this.getRootNode()
+							.getChildNode(Integer.parseInt(level[0]))
+							.getChildNode(Integer.parseInt(level[1]))
+							.getChildNode(Integer.parseInt(level[2])).getContent());
 				}
-
-				// System.out.println(linePartsDoubleDot[0]);
-				// System.out.println(dots[]); // + " : " + dots[1] + " : " +
-				// dots[2]);
-
 			}
 		}
 	}
