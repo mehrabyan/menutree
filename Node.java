@@ -22,7 +22,11 @@ public class Node<T> {
 	public void setContent(T content) {
 		this.content = content;
 	}
-
+	
+//	public Node<T> getCurrentNode(Node<T> node) {
+//		return node;
+//	}
+	
 	public Node<T> getParent() {
 		return parent;
 	}
