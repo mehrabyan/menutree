@@ -50,14 +50,14 @@ public class Node<T> {
 			node.setParent(this);
 	}
 
-	public void addChildNode(Node<T> node) {
+	public void addChildNode(Integer i,Node<T> node) {
 		if (node != null && !children.values().contains(node)) {
-			if (!children.isEmpty()) {
-				int i = 0;
-				i = ((TreeMap<Integer, Node<T>>) children).lastKey();
-				children.put(i + 1, node);
-			} else
-				children.put(1, node);
+//			if (!children.isEmpty()) {
+//				int i = 0;
+//				i = ((TreeMap<Integer, Node<T>>) children).lastKey();
+				children.put(i, node);
+//			} else
+//				children.put(1, node);
 			node.setParent(this);
 		}
 	}

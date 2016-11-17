@@ -29,8 +29,9 @@ public class Menunodes {
 							tfm.currentNode = tfm.currentNode.getChildNode(Integer.parseInt(level[k]));
 							k++;
 						}
+						tfm.currentNode.addChildNode(Integer.parseInt(level[k]),new Node<String>(linePartsSplitedByDD[1]));
 					}
-					tfm.currentNode.addChildNode(new Node<String>(linePartsSplitedByDD[1]));		
+							
 				}
 				
 			}
