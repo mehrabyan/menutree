@@ -14,7 +14,6 @@ public class TreeForMenu extends Tree<String> {
 		Scanner scan = new Scanner(System.in);
 		mfg = mn.generateMenuNodes();
 		mfg.getRootNode().getChildren();
-		boolean forLoop = true;
 		for (Integer i : mfg.getRootNode().getChildren().keySet()) {
 			System.out.println(i + ". " + mfg.getRootNode().getChildren().get(i).getContent());
 		}
@@ -22,19 +21,17 @@ public class TreeForMenu extends Tree<String> {
 		int i = scan.nextInt();
 		currentNode = mfg.getRootNode().getChildNode(i);
 		np.toChildren(currentNode);
-		while (forLoop) {
+		do {
 		int j = scan.nextInt();
-		if(j ==0) {
-			np.toParent(currentNode);
-//		currentNode =  
+		if(j == 0) {
+				currentNode = np.toParent(currentNode);
 		}
 		else {
-			currentNode = currentNode.getChildNode(j);
-			np.toChildren(currentNode);
+				currentNode = currentNode.getChildNode(j);
+				np.toChildren(currentNode);
 		}
-		} 
-		scan.close();
-		
+		} while (true); 
+//		scan.close();
 	}
 
 	public static void main(String[] args) throws IOException {
