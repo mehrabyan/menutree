@@ -1,6 +1,7 @@
 package menutree;
 
-import java.util.*;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Node<T> {
 	private T content;
@@ -33,7 +34,7 @@ public class Node<T> {
 	public Map<Integer, Node<T>> getChildren() {
 		return children;
 	}
-	
+
 	public Node<T> getChildNode(int i) {
 		return children.get(i);
 	}
@@ -44,19 +45,15 @@ public class Node<T> {
 		for (Node<T> node : children.values())
 			node.setParent(this);
 	}
-	
-	public Node<T> makeNode(T content) {
-		return new Node<T>(content);
-	}
 
 	public void addChildNode(Node<T> node) {
 		if (node != null && !children.values().contains(node)) {
-			int i = 0;
 			if (!children.isEmpty()) {
-			i = ((TreeMap<Integer, Node<T>>) children).lastKey();
-			children.put(i + 1, node);
-			}
-			else children.put(1, node);
+				int i = 0;
+				i = ((TreeMap<Integer, Node<T>>) children).lastKey();
+				children.put(i + 1, node);
+			} else
+				children.put(1, node);
 			node.setParent(this);
 		}
 	}
