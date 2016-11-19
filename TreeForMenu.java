@@ -1,49 +1,44 @@
 package menutree;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class TreeForMenu extends Tree<String> {
-	String line = null;
-	String[] linePartsDoubleDot;
 
-	public void generedMenuItems() {
-		FromTxtToList fttl = new FromTxtToList();
-		try {
-			fttl.readMenuFromFile();
-		} catch (IOException e) {
-			e.printStackTrace();
+	public Node<String> currentNode;
+
+	public void generateMenuForGame() throws IOException {
+		TreeForMenu mfg = new TreeForMenu();
+		Menunodes mn = new Menunodes();
+		NodePath np = new NodePath();
+		Scanner scan = new Scanner(System.in);
+
+		mfg = mn.generateMenuNodes();
+		mfg.getRootNode().getChildren();
+
+		for (Integer i : mfg.getRootNode().getChildren().keySet()) {
+			System.out.println(i + ". " + mfg.getRootNode().getChildren().get(i).getContent());
 		}
 
-		for (int i = 0; i < fttl.linesMenuText.size(); i++) {
-			String[] dots = { null, null, null, null };
-			line = (String) fttl.linesMenuText.get(i);
-			if (line.length() != 0) {
-				linePartsDoubleDot = line.split(":");
-				dots = linePartsDoubleDot[0].split(".");
-				Node<String> node = new Node(linePartsDoubleDot[1]);
-				System.out.println(node.getContent());
-				if (dots[0] != null) {
-					System.out.println(dots[0].toString());
-					if (dots[1] == null) {
-						this.getRootNode().addChildNode(node);
-						System.out.println(this.getRootNode().getChildNode(Integer.parseInt(dots[0])).getContent());
-					} else {
-						if (dots[2] == null) {
-							this.getRootNode().getChildNode(Integer.parseInt(dots[0])).addChildNode(node);
-							System.out.println(this.getRootNode().getChildNode(Integer.parseInt(dots[0]))
-									.getChildNode(Integer.parseInt(dots[1])).getContent());
-						}
-						this.getRootNode().getChildNode(Integer.parseInt(dots[0]))
-								.getChildNode(Integer.parseInt(dots[1])).addChildNode(node);
-					}
-				}
+		int i = scan.nextInt();
+		currentNode = mfg.getRootNode().getChildNode(i);
+		np.toChildren(currentNode);
+
+		do {
+			int j = scan.nextInt();
+			if (j == 0) {
+				currentNode = np.toParent(currentNode);
+			} else {
+				currentNode = currentNode.getChildNode(j);
+				np.toChildren(currentNode);
 			}
-		}
+		} while (true);
+		// scan.close();
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		TreeForMenu tfm = new TreeForMenu();
 
-		tfm.generedMenuItems();
+		tfm.generateMenuForGame();
 	}
 }
