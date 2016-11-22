@@ -23,10 +23,6 @@ public class Node<T> {
 		this.content = content;
 	}
 	
-//	public Node<T> getCurrentNode(Node<T> node) {
-//		return node;
-//	}
-	
 	public Node<T> getParent() {
 		return parent;
 	}
@@ -52,12 +48,7 @@ public class Node<T> {
 
 	public void addChildNode(Integer i,Node<T> node) {
 		if (node != null && !children.values().contains(node)) {
-//			if (!children.isEmpty()) {
-//				int i = 0;
-//				i = ((TreeMap<Integer, Node<T>>) children).lastKey();
 				children.put(i, node);
-//			} else
-//				children.put(1, node);
 			node.setParent(this);
 		}
 	}
