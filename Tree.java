@@ -1,7 +1,7 @@
 package menutree;
 
 public class Tree<T> {
-	public Node<T> rootNode = new Node<T>();
+	private Node<T> rootNode = new Node<T>();
 
 	public Node<T> getRootNode() {
 		return rootNode;

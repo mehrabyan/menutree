@@ -1,7 +1,6 @@
 package menutree;
 
-import java.io.*;
-import java.util.*;
+import java.util.Scanner;
 
 public class TreeForMenu extends Tree<String> {
 
@@ -9,7 +8,6 @@ public class TreeForMenu extends Tree<String> {
 
 	public boolean isValidPath(String[] path) throws Exception {
 		boolean isValid = true;
-
 		Node<String> currentNode = getRootNode();
 
 		if (currentNode == null)
@@ -20,48 +18,48 @@ public class TreeForMenu extends Tree<String> {
 
 			if (currentNode == null) {
 				isValid = false;
+				System.out.println("The path is not valid");
 				break;
 			}
 		}
 		return isValid;
 	}
 
-	// return isValid;
-	// }
-
-	public void generateMenuForGame() throws IOException {
-		TreeForMenu mfg = new TreeForMenu();
-		Menunodes mn = new Menunodes();
+	public void generateMenuForGame() throws Exception {
+		TreeForMenu tfm = new TreeForMenu();
+		NodesForMenu nfm = new NodesForMenu();
+		// Menunodes mn = new Menunodes();
 		Scanner scan = new Scanner(System.in);
 
-		mfg = mn.generateMenuNodes();
-		mfg.getRootNode().getChildren();
+		tfm = nfm.generateMenuNodes();
+		currentNode = tfm.getRootNode();
 
-		for (Integer i : mfg.getRootNode().getChildren().keySet()) {
-			System.out.println(i + ". " + mfg.getRootNode().getChildren().get(i).getContent());
+		for (Integer i : currentNode.getChildren().keySet()) {
+			System.out.println(i + ". " + tfm.getRootNode().getChildNode(i).getContent());
 		}
-
-		int i = scan.nextInt();
-		currentNode = mfg.getRootNode().getChildNode(i);
-		for (Integer m : currentNode.getChildren().keySet())
-			System.out.println(m + ". " + currentNode.getChildren().get(m).getContent());
 
 		do {
 			int j = scan.nextInt();
 			if (j == 0) {
-				for (Integer k : currentNode.getParent().getChildren().keySet())
-					System.out.println(k + ". " + currentNode.getParent().getChildren().get(k).getContent());
-				currentNode = currentNode.getParent();
+				if (currentNode.hasParent()) {
+					for (Integer k : currentNode.getParent().getChildren().keySet())
+						System.out.println(k + ". " + currentNode.getParent().getChildNode(k).getContent());
+					currentNode = currentNode.getParent();
+				} else
+					System.out.println("You are in root");
 			} else {
-				currentNode = currentNode.getChildNode(j);
-				for (Integer m : currentNode.getChildren().keySet())
-					System.out.println(m + ". " + currentNode.getChildren().get(m).getContent());
+				if (currentNode.hasChildren()) {
+					currentNode = currentNode.getChildNode(j);
+					for (Integer m : currentNode.getChildren().keySet())
+						System.out.println(m + ". " + currentNode.getChildNode(m).getContent());
+				} else
+					System.out.println("You are in lower level");
 			}
 		} while (true);
 		// scan.close();
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 		TreeForMenu tfm = new TreeForMenu();
 
 		tfm.generateMenuForGame();

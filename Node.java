@@ -30,6 +30,11 @@ public class Node<T> {
 	public void setParent(Node<T> parent) {
 		this.parent = parent;
 	}
+	
+	public boolean hasParent() {
+		return this.getParent() != null;
+	}
+
 
 	public Map<Integer, Node<T>> getChildren() {
 		return children;
@@ -52,4 +57,9 @@ public class Node<T> {
 			node.setParent(this);
 		}
 	}
+	
+	public boolean hasChildren() {
+		return this.getChildren() != null;
+	}
+	
 }

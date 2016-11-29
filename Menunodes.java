@@ -38,7 +38,7 @@ public class Menunodes {
 							}
 							tfm.currentNode = tfm.currentNode.getChildNode(Integer.parseInt(level[k]));
 							k++;
-						}
+						}					
 						tfm.currentNode.addChildNode(Integer.parseInt(level[k]),
 								new Node<String>(linePartsSplitedByDD[1]));
 					}
@@ -48,23 +48,3 @@ public class Menunodes {
 		return tfm;
 	}
 }
-
-// private boolean isValidPath(String[]path, TreeForMenu tfm) throws Exception {
-// boolean isValid = true;
-//
-// Node<String> currentNode = tfm.getRootNode();
-//
-// if(currentNode == null)
-// throw new Exception("Root node can't be null");
-//
-// for (String joint : path) {
-// currentNode = currentNode.getChildNode(Integer.parseInt(joint));
-//
-// if(currentNode == null){
-// isValid = false;
-// break;
-// }
-// }
-
-// return isValid;
-// }
