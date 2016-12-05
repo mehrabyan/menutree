@@ -30,6 +30,7 @@ public class TreeForMenu extends Tree<String> {
 		NodesForMenu nfm = new NodesForMenu();
 		// Menunodes mn = new Menunodes();
 		Scanner scan = new Scanner(System.in);
+		Scanner ss = new Scanner(System.in);
 
 		tfm = nfm.generateMenuNodes();
 		currentNode = tfm.getRootNode();
@@ -38,7 +39,9 @@ public class TreeForMenu extends Tree<String> {
 			System.out.println(i + ". " + tfm.getRootNode().getChildNode(i).getContent());
 		}
 
+//		String text;
 		do {
+			
 			int j = scan.nextInt();
 			if (j == 0) {
 				if (currentNode.hasParent()) {
@@ -55,8 +58,10 @@ public class TreeForMenu extends Tree<String> {
 				} else
 					System.out.println("You are in lower level");
 			}
-		} while (true);
-		// scan.close();
+		} while (true); //((text = ss.nextLine()) != "quit");
+//		 scan.close();
+//		 ss.close();
+//		 System.exit(0);
 	}
 
 	public static void main(String[] args) throws Exception {
